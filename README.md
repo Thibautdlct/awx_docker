@@ -5,7 +5,6 @@ Exemple
 
 ```
 # Pour exécuter:
-- déplacer le dossier AWX_docker_install dans /root/
-  # chmod +x install.sh
+# déplacer le dossier AWX_docker_install dans /root/
   ./install.sh
 ```
