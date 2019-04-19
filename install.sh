@@ -33,7 +33,6 @@ docker cp /root/awx_docker/server.csr awx_web:/etc/nginx/certs
 docker cp /root/awx_docker/server.key awx_web:/etc/nginx/certs
 docker cp /root/awx_docker/server.crt awx_web:/etc/nginx/certs
 rm server*
-
 echo -e "\033[31mRedémarrage des services Web (~2min)\033[0m"
 docker container stop awx_web > /dev/null 2>&1
 sleep 10s
