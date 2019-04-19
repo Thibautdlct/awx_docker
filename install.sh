@@ -18,17 +18,17 @@ yes | cp -rf /root/awx_docker/files/inventory /root/awx_docker/awx/installer/ > 
 cd /root/awx_docker/awx/installer && ansible-playbook -i inventory install.yml -vv > /dev/null 2>&1
 
 echo -e "Recherche de mise à jour"
-docker stop awx_task
-docker rm awx_task
-docker rmi ansible/awx_task
+docker stop awx_task > /dev/null 2>&1
+docker rm awx_task > /dev/null 2>&1
+docker rmi ansible/awx_task > /dev/null 2>&1
 
-docker stop awx_web
-docker rm awx_web
-docker rmi ansible/aws_web
-git pull
-cd /root/awx_docker/awx/installer
-# Review inventory
-ansible-playbook -i inventory install.yml
+docker stop awx_web > /dev/null 2>&1
+docker rm awx_web > /dev/null 2>&1
+docker rmi ansible/aws_web > /dev/null 2>&1
+git pull > /dev/null 2>&1
+cd /root/awx_docker/awx/installer > /dev/null 2>&1
+
+ansible-playbook -i inventory install.yml > /dev/null 2>&1
 
 echo "Configuration de nginx"
 SERVER=$(hostname)
