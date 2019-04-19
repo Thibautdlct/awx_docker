@@ -10,6 +10,7 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 yum install docker-ce -y > /dev/null 2>&1
 systemctl start docker > /dev/null 2>&1
 systemctl enable docker > /dev/null 2>&1
+pip install docker-compose > /dev/null 2>&1
 pip uninstall docker docker-py > /dev/null 2>&1
 pip install docker-compose > /dev/null 2>&1
 echo -e "\033[31mInstallation de AWX (~5mins)\033[0m"
