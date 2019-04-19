@@ -11,7 +11,7 @@ yum install docker-ce -y > /dev/null 2>&1
 systemctl start docker > /dev/null 2>&1
 systemctl enable docker > /dev/null 2>&1
 pip install docker-compose > /dev/null 2>&1
-pip uninstall docker docker-py > /dev/null 2>&1
+pip uninstall docker docker-py -y > /dev/null 2>&1
 pip install docker-compose > /dev/null 2>&1
 echo -e "\033[31mInstallation de AWX (~5mins)\033[0m"
 cd /root/awx_docker/ && git clone https://github.com/ansible/awx.git > /dev/null 2>&1
@@ -55,5 +55,5 @@ echo 'ansible ALL=(ALL) NOPASSWD: ALL' | sudo EDITOR='tee -a' visudo > /dev/null
 echo -e "\033[31mInstallation terminée\033[0m"
 echo ""
 
-ip4=$(/sbin/ip -o -4 addr list ens33 | awk '{print $4}' | cut -d/ -f1) > /dev/null 2>&1
+ip4=$(hostname  -I | cut -f1 -d' ') > /dev/null 2>&1
 echo -e "\033[32mConnectez vous à l'adresse https://$ip4/#/login\033[0m"
