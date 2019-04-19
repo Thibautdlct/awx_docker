@@ -10,11 +10,9 @@ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce
 yum install docker-ce -y > /dev/null 2>&1
 systemctl start docker > /dev/null 2>&1
 systemctl enable docker > /dev/null 2>&1
-pip install docker-compose > /dev/null 2>&1
-pip uninstall docker docker-py -y > /dev/null 2>&1
-pip install docker-compose > /dev/null 2>&1
+
 echo -e "\033[31mInstallation de AWX (~5mins)\033[0m"
-cd /root/awx_docker/ && git clone https://github.com/ansible/awx.git > /dev/null 2>&1
+cd /root/awx_docker/ && git clone https://github.com/Thibautdlct/awx.git > /dev/null 2>&1
 yes | cp -rf /root/awx_docker/files/inventory /root/awx_docker/awx/installer/ > /dev/null 2>&1
 
 cd /root/awx_docker/awx/installer && ansible-playbook -i inventory install.yml -vv > /dev/null 2>&1
