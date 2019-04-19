@@ -16,6 +16,23 @@ cd /root/awx_docker/ && git clone https://github.com/Thibautdlct/awx.git > /dev/
 yes | cp -rf /root/awx_docker/files/inventory /root/awx_docker/awx/installer/ > /dev/null 2>&1
 
 cd /root/awx_docker/awx/installer && ansible-playbook -i inventory install.yml -vv > /dev/null 2>&1
+
+echo -e "\033[31mRecherche de mise à jour\033[0m"
+docker stop awx_task
+docker rm awx_task
+docker rmi ansible/awx_task
+
+docker stop awx_web
+docker rm awx_web
+docker rmi ansible/aws_web
+
+git pull
+cd /root/awx_docker/awx/installer
+# Review inventory
+ansible-playbook -i inventory install.yml
+
+
+
 echo "Configuration de nginx"
 SERVER=$(hostname)
 cat /root/awx_docker/files/nginx.conf | sed -e "s/server_name _;/server_name $SERVER;/g" > /dev/null 2>&1
@@ -31,6 +48,7 @@ docker cp /root/awx_docker/server.csr awx_web:/etc/nginx/certs
 docker cp /root/awx_docker/server.key awx_web:/etc/nginx/certs
 docker cp /root/awx_docker/server.crt awx_web:/etc/nginx/certs
 rm server*
+
 echo -e "\033[31mRedémarrage des services Web (~2min)\033[0m"
 docker container stop awx_web > /dev/null 2>&1
 sleep 10s
